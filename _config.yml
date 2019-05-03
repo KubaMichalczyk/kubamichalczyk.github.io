@@ -1,0 +1,16 @@
+title: Kuba Michalczyk
+title: Kuba Michalczyk
+email: kuba.michalczyk[at]gmail.com
+description: 
+twitter_username: KubaMichalczyk
+github_username:  KubaMichalczyk
+linkedin_username: JakubMichalczyk
+url: https://kubamichalczyk.github.io/
+
+# Build settings
+markdown: kramdown
+theme: minima
+plugins:
+  - jekyll-feed
+
+
