@@ -129,8 +129,7 @@ push this highest-xG-gain band and therefore, where we reward passes the
 most. Parameter a is sufficient to do this up to a certain point, s is
 kind of a helper here to push the highest-xG-gain band even deeper in
 the pitch. To see how those parameters affect the form of \\(F\\), please
-visit this basic [Shiny
-App](https://kubamichalczyk.shinyapps.io/boosting-xG-gain/) I have
+visit this basic [ShinyApp](https://kubamichalczyk.shinyapps.io/extending-xG-gain/) I have
 prepared. By sliding the bars in the left upper corner you can observe
 how \\(1 - F\\) changes (right below the bars) and how it affect xG values (on
 the right). In fact, keeping \\(s\\) to default value and varying \\(a\\)
@@ -222,7 +221,7 @@ names. It has to be noted that:
 
 To play yourself with different functions from the defined family and
 look how the top 20 list is changing accross them, please go to the
-[ShinyApp](https://kubamichalczyk.shinyapps.io/boosting-xG-gain/). Those
+[ShinyApp](https://kubamichalczyk.shinyapps.io/extending-xG-gain/). Those
 who have access to OptaPro data are also encouraged to check out the
 code stored [here](https://github.com/KubaMichalczyk/extending-xG-gain).
 
