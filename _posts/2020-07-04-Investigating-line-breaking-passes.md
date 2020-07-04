@@ -53,7 +53,7 @@ At the other end of the scale, a non-shot expected goals model, apportioning val
 
 1. The maximum 'angle of view', which is defined as the maximum angle created by the ball and any two adjacent players from the first opposition line in front of a player with the ball;
 
-<img src="https://kubamichalczyk.github.io//images/angle_of_view.png" width=525 height=340 style="display: block; margin: auto;" />
+<img src="https://kubamichalczyk.github.io//images/angle_of_view.png" width="525" height="340" style="display: block; margin: auto;" />
 <p align="center"><i>Figure 2: An example “angle of view”, displaying the area where a player in possession can pass between two opposition players within a defending line. The angle between player one, the ball and player two, marked as alpha, is the maximum angle in this scenario. The angle between player three, the ball and player four is negative and therefore is ignored in calculating the ‘line integrity’ defined in point 3 below.</i></p>
 
 2. The maximum distance between adjacent players in the first opposition line in front of the player with the ball;
@@ -64,7 +64,7 @@ At the other end of the scale, a non-shot expected goals model, apportioning val
 
 5. 'Pitch control' values, at the start and the end of an action, are defined according to the model introduced in this [white paper, authored by Luke Bornn and Javier Fernandez at Sloan 2018.](http://www.sloansportsconference.com/wp-content/uploads/2018/03/1003.pdf)
 
-<img src="https://kubamichalczyk.github.io/images/pitch_control.png" width=525 height=340 style="display: block; margin: auto;" />
+<img src="https://kubamichalczyk.github.io/images/pitch_control.png" width="525" height="340" style="display: block; margin: auto;" />
 <p align="center"><i>Figure 3: An example output of the ‘pitch control’ model.</i></p>
 
 Both feature one and feature two try to capture any possible vulnerability in the set-up of the line which is closest to the player in possession. The premise behind the ‘angle of view’ is that it is easier to pass the ball between two players when the angle created by those two players and the ball is bigger, either because they are set far apart from other, or because the player in possession is closer to the opposition line.
