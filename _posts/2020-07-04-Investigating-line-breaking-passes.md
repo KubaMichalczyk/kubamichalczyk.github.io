@@ -19,7 +19,7 @@ To prevent immediate switching between lines, the x coordinate was averaged over
 Adopting a set number of clusters may not be the optimal approach for analysing other areas of football, but I found it acceptable when looking for line-breaking passes, as for the most part, this is how a defensive team would normally be set up. In addition, allowing for a variable number of clusters would likely lead to clusters consisting of one player who doesn’t really form a line, but cannot be ignored as their positioning may be crucial to the defensive set-up.
 
 <img src="https://kubamichalczyk.github.io/images/lines_jenks.gif" style="display: block; margin: auto;" />
-***Figure 1. An example of formation line detection, using 1-D clustering.***
+<p style="text-align: center;">*Figure 1. An example of formation line detection, using 1-D clustering.*</p>
 
 For the purposes of this analysis, a line-breaking pass is defined as a pass which not only intersects at least one of the opposition lines in a geometric sense, but also:
 
@@ -42,7 +42,8 @@ All open play passes were considered in the analysis, however as Z coordinates (
 One final consideration before we move onto the model itself concerns the challenges of defining an intercepted pass. As the end coordinates of an interception points to the place on the field where the interception takes place, we cannot rely on them to determine whether a pass was meant to be line-breaking or not.
 
 However, given we have information on the angle of the pass and the lower-bound of a pass length, we can try to infer the intended final destination of a pass. To do this, we apply the [Weibull survival model](https://en.wikipedia.org/wiki/Survival_function#Weibull_survival_function), which is a technique specifically suited to deal with lower-bounded data, to estimate the expected additional length of a pass from the point of interception. This way, even if a pass was intercepted, but its projected destination classified it as line-breaking, we could still mark it as an unsuccessful line-breaking pass.
-Establishing a Model to Assign Value to Passes
+
+### Establishing a Model to Assign Value to Passes
 
 The initial goal of this project was to try to quantify the value of different line-breaking passes compared to those which are not, through comparing passes with similar spatial characteristics.
 
@@ -53,7 +54,7 @@ At the other end of the scale, a non-shot expected goals model, apportioning val
 1. The maximum 'angle of view', which is defined as the maximum angle created by the ball and any two adjacent players from the first opposition line in front of a player with the ball;
 
 <img src="https://kubamichalczyk.github.io//images/angle_of_view.png" style="display: block; margin: auto;" />
-***Figure 2: An example “angle of view”, displaying the area where a player in possession can pass between two opposition players within a defending line. The angle between player one, the ball and player two, marked as alpha, is the maximum angle in this scenario. The angle between player three, the ball and player four is negative and therefore is ignored in calculating the ‘line integrity’ defined in point 3 below.***
+<p style="text-align: center;">*Figure 2: An example “angle of view”, displaying the area where a player in possession can pass between two opposition players within a defending line. The angle between player one, the ball and player two, marked as alpha, is the maximum angle in this scenario. The angle between player three, the ball and player four is negative and therefore is ignored in calculating the ‘line integrity’ defined in point 3 below.*</p>
 
 2. The maximum distance between adjacent players in the first opposition line in front of the player with the ball;
 
@@ -64,7 +65,7 @@ At the other end of the scale, a non-shot expected goals model, apportioning val
 5. 'Pitch control' values, at the start and the end of an action, are defined according to the model introduced in this [white paper, authored by Luke Bornn and Javier Fernandez at Sloan 2018.](http://www.sloansportsconference.com/wp-content/uploads/2018/03/1003.pdf)
 
 <img src="https://kubamichalczyk.github.io/images/pitch_control.png" style="display: block; margin: auto;" />
-***Figure 3: An example output of the ‘pitch control’ model.***
+<p style="text-align: center;">*Figure 3: An example output of the ‘pitch control’ model.*</p>
 
 Both feature one and feature two try to capture any possible vulnerability in the set-up of the line which is closest to the player in possession. The premise behind the ‘angle of view’ is that it is easier to pass the ball between two players when the angle created by those two players and the ball is bigger, either because they are set far apart from other, or because the player in possession is closer to the opposition line.
 
@@ -75,21 +76,22 @@ When we apply a sum of inverse angles and distances to maintain the intuitive sc
 One key thing to mention is that ‘line integrity’ does not incorporate negative angles of view. Returning to the display in Figure 2, this negative angle of view is created between player three, the ball, and player four, who is effectively hidden behind the rest of the line. In this case, a potential pass could only go through those two players from the other side, breaking the line earlier between players two and three. Therefore, although the position of player four cannot be totally ignored, it is less critical than the positions of players one, two and three. As a result I chose not to incorporate negative angles in the calculation.
 
 All five features were processed in line with the [VAEP framework](https://arxiv.org/pdf/1802.07127.pdf), which in short meant that the characteristics of the current and previous two events in a possession chain were fed into a XGBoost model to predict the probability of the team scoring or conceding a goal in the next ten actions.
-Does a Line-Breaking Pass Increase Goal Probability?
+
+### Does a Line-Breaking Pass Increase Goal Probability?
 
 The violin plot below displays prediction probabilities for scoring and conceding a goal during any of the ten events following a pass, based on whether a pass is line-breaking or not.
 
 A wider area on a violin plot represents a higher proportion of scenarios allocated a given probability. The median probabilities are marked by the dots and the range between the 25th and 75th percentile are documented by bars.
 
 <img src="https://kubamichalczyk.github.io/images/violin-plots-scores-SP-1.png" style="display: block; margin: auto;" />
-***To retain a practical y-axis range, 1% of the highest probability values have been removed.***
+<p style="text-align: center;">*To retain a practical y-axis range, 1% of the highest probability values have been removed.*</p>
 
 Although this approach lacks statistical rigour, it indicates that line-breaking passes boost the probability of a goal being scored, with a median value almost twice as high as non-line-breaking passes.
 
 It is also noteworthy that an unsuccessful line-breaking pass doesn’t seem to increase the probability of a goal being conceded that much either, as highlighted below.
 
 <img src="https://kubamichalczyk.github.io/images/violin-plots-concedes-SP-1.png" style="display: block; margin: auto;" />
-***To retain a practical y-axis range, 1% of the highest probability values have been removed.***
+<p style="text-align: center;">*To retain a practical y-axis range, 1% of the highest probability values have been removed.*</p>
 
 ### Who Were the Most Effective Players at Completing Line-Breaking Passes?
 
@@ -100,14 +102,14 @@ The scatter chart below plots all players who played as a central defender in at
 The players in the top right hand quadrant scored above average in both categories.
 
 <img src="https://kubamichalczyk.github.io/images/central_defenders-SP-1.png" style="display: block; margin: auto;" />
-***Only players with at least 900 minutes played in central defence were included.***
+<p style="text-align: center;">*Only players with at least 900 minutes played in central defence were included.*</p>
 
 As with centre backs looking to play progressive passes, having the ability to transition the ball into the next attacking phase is crucial for deep-lying playmakers. The outputs for players categorised as holding central midfielders are plotted below.
 
 One of the key standout players from last season was Ruslan Malinovskiy, who transferred from Genk to Atalanta last summer.
 
 <img src="https://kubamichalczyk.github.io/images/holding_midfielders-SP-1.png" style="display: block; margin: auto;" />
-***Only players with at least 900 minutes played at defensive midfield were included.***
+<p style="text-align: center;">*Only players with at least 900 minutes played at defensive midfield were included.*</p>
 
 ### Can You Identify Line-Breaking Passes with Event Data?
 
@@ -126,3 +128,7 @@ Whilst this isn’t perfect, from a workflow perspective it would still narrow d
 The bad news is that if you want near-perfect classification of line-breaking passes without manual intervention, you still need to use tracking data.
 
 **Acknowledgments**: I would like to thank Karun Singh, who read a draft version of this article and provided invaluable feedback. Moreover, thanks go to Ricardo Tavares, as well as the authors of Socceraction package, whose code was extended to prepare pitch visualisations and pre-process the data, respectively. The data used in the analysis was provided by the Belgian Pro League, captured by Stats Perform.
+
+### Appendix
+
+The challenging goal I had in mind when kicking off with this project was to measure how much more valuable a line-breaking pass really is compared to the one that is not. My initial attempt involved the methods of Explainable Artificial Intelligence (XAI). As it turned out, an indicator feature which tells the model if a pass was line-breaking or not wasn’t particularly important to the model. At first sight, it may be something that would question their value, but I think the reality is more complicated. For obvious reasons, this 'Is line-breaking?' feature is highly correlated with other features like vertical distance or pitch control features. Also, the way XGBoost works made the model prefer the continuous features (like pitch coordinates, pitch control values etc.) over categorical ones (including line-breaking pass indicator), which directly impacts their importance scores. Taking only categorical variables into account, 'Is line-breaking?' feature was second top behind a feature that indicated if an action was open-play or set-play. Another possible approach was to use Logistic Regression instead of XGBoost to model the probabilities, which is simpler to interpret and could deliver an exact formula for the incremental in probability between a line-breaking and standard pass. However, due to the correlation with other spatial features and the complexity of the task, the quality of such a model would certainly be impacted. As a result, I settled on a visual comparison with violin plots. 
